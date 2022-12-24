@@ -1,10 +1,8 @@
 import { galleryItems } from './gallery-items.js';
 
 const galleryContainer = document.querySelector('.gallery');
-
 const itemsMarkup = createGalleryItemsMarkup(galleryItems);
 galleryContainer.insertAdjacentHTML('beforeend', itemsMarkup);
-// console.dir(galleryContainer);
 
 function createGalleryItemsMarkup(items) {
     return items.map( ({preview, original, description}) => {
@@ -37,5 +35,11 @@ function createBasicLightBox(source) {
     const instance = basicLightbox.create(
         `<img class="gallery__image" src=${source}></img>`
     )
-    instance.show()
+    instance.show();
+    document.addEventListener('keydown', event => {
+        if(event.key === 'Escape') {
+            instance.close();
+        }
+    });
 }
+
